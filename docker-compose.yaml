@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  calocal_be:
+    image: jcarriquiry/access-control-local-be:v17
+    ports:
+      - "3888:3888"
+    env_file:
+      - .env-be
+    networks:
+      - calocal_network
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "1"
+  calocal_fe:
+    image: jcarriquiry/access-control-local-fe:v6
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env-fe 
+    networks:
+      - calocal_network
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "1"
+
+networks:
+  calocal_network:
+    driver: bridge
