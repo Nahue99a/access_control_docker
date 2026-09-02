@@ -9,11 +9,6 @@ services:
     networks:
       - calocal_network
     restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "3m"
-        max-file: "1"
   calocal_fe:
     image: jcarriquiry/access-control-local-fe:v6
     ports:
@@ -23,11 +18,13 @@ services:
     networks:
       - calocal_network
     restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "3m"
-        max-file: "1"
+  lpr:
+    image: jcarriquiry/access-control-local-alpr:v2
+    ports:
+      - "5000:5000"
+    networks:
+      - calocal_network
+    restart: always
 
 networks:
   calocal_network:
